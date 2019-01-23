@@ -15,25 +15,16 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
       - run: npm install
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+      
+
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-  
-  deploy:
-    machine:
-        enabled: true  
-    steps:
-       - checkout
-       - run: 
-          name: heroku container deploy
-          command: |
-            #  heroku plugins:install heroku-container-registry
-            #  heroku container:login
-            #  heroku container:push web --app $HEROKU_APP_NAME
-            # #  heroku container:release web
-             curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
-             heroku container:login
-             heroku container:push web --app $HEROKU_APP_NAME
-             heroku container:release web --app $HEROKU_APP_NAME
-
+        
+      # run tests!
+      #- run: yarn test
