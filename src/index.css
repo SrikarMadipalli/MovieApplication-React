@@ -56,7 +56,7 @@ h1 {
   line-height: 65px;
 }
 #home {
-  background: url("http://localhost:8080/src/assets/hero.jpg");
+  background: url("../src/assets/hero.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
